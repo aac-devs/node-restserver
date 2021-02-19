@@ -34,7 +34,8 @@ const UserSchema = Schema({
 
 // Reescribimos el método toJSON para excluir __v y password cuando se lea el usuario desde la BD
 UserSchema.methods.toJSON = function () {
-  const { __v, password, ...user } = this.toObject();
+  const { _id, __v, password, ...user } = this.toObject();
+  user.uid = _id;
   return user;
 };
 

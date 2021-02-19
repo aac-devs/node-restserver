@@ -61,11 +61,11 @@ const usersPatch = (req, res = response) => {
 
 const usersDelete = async (req, res = response) => {
   const { id } = req.params;
-  // Físicamente borrar
-  // const user = await User.findByIdAndDelete(id);
 
-  const user = await User.findByIdAndUpdate(id, { status: false });
-  res.json(user);
+  const deletedUser = await User.findByIdAndUpdate(id, { status: false });
+  // const authUser = req.user;
+
+  res.json({ deletedUser });
 };
 
 module.exports = {
