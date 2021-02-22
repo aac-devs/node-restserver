@@ -30,10 +30,11 @@ const ProductSchema = Schema({
     type: Boolean,
     default: true,
   },
+  img: { type: String },
 });
 
 ProductSchema.methods.toJSON = function () {
-  const { __v, _id, ...data } = this.toObject();
+  const { __v, _id, status, ...data } = this.toObject();
   data.uid = _id;
   return data;
 };

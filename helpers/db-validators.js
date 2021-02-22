@@ -1,3 +1,4 @@
+const { Collection } = require("mongoose");
 const { User, Category, Product, Role } = require("../models");
 
 const isValidRole = async (role = "") => {
@@ -35,10 +36,22 @@ const existProductById = async (id) => {
   }
 };
 
+// Validar colecciones permitidas
+const allowedCollections = async (collection = "", collections = []) => {
+  const included = collections.includes(collection);
+  if (!included) {
+    throw new Error(
+      `Collection ${collection} isn't allowed - (${collections})`
+    );
+  }
+  return true;
+};
+
 module.exports = {
   isValidRole,
   existEmail,
   existUserById,
   existCategoryById,
   existProductById,
+  allowedCollections,
 };
